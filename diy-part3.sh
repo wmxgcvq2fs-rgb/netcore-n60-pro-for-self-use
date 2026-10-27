@@ -19,6 +19,17 @@
 # Modify hostname
 #sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
 
+
+# 修改默认后台地址为 192.168.6.1
+sed -i 's/192.168.1.1/192.168.6.1/g' package/base-files/files/bin/config_generate
+
+# 添加常用第三方源
+echo 'src-git openclash https://github.com/vernesong/OpenClash' >>feeds.conf.default
+echo 'src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main' >>feeds.conf.default
+echo 'src-git istore https://github.com/linkease/istore;main' >>feeds.conf.default
+
+# 添加 liquid 主题
+git clone https://github.com/xylz0928/luci-theme-liquid package/luci-theme-liquid
 # Remove print samba4
 sed -i '/printer/d' target/linux/mediatek/image/mt7986.mk
 sed -i 's/kmod-usb-net-rndis //g' target/linux/mediatek/image/mt7986.mk
